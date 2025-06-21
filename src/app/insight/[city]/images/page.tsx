@@ -1,7 +1,13 @@
 import { fetchImages } from "@features/insight/api";
 import Image from "next/image";
 
-export default async function Page({ params }: { params: { city: string } }) {
+type PageProps = {
+  params: {
+    city: string;
+  };
+};
+
+export default async function Page({ params }: PageProps) {
   const images = await fetchImages(params.city);
 
   return (
@@ -17,7 +23,7 @@ export default async function Page({ params }: { params: { city: string } }) {
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"
-            priority // optionally improve LCP
+            priority
           />
         </div>
       ))}

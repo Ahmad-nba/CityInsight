@@ -7,6 +7,12 @@ export type NewsArticle = {
   source: string;
   image_url: string | null;
 };
+type RawNewsArticle = {
+  title: string;
+  link: string;
+  source_id: string;
+  image_url?: string;
+};
 
 export default async function fetchNews(city: string): Promise<NewsArticle[]> {
   const url = `${BASE_URL}?apikey=${NEWS_API_KEY}&q=${city}&language=en&country=us&category=top`;
@@ -22,7 +28,7 @@ export default async function fetchNews(city: string): Promise<NewsArticle[]> {
 
   const articles = data.results.slice(0, 6); // Only top 6
 
-  return articles.map((article: any) => ({
+  return articles.map((article: RawNewsArticle) => ({
     title: article.title,
     link: article.link,
     source: article.source_id,

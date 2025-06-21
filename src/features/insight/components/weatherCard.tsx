@@ -1,4 +1,7 @@
+"use client";
+
 import { ComponentType } from "react";
+import Image from "next/image";
 
 type WeatherCardProps = {
   title: string;
@@ -15,13 +18,18 @@ export default function WeatherCard({
 }: WeatherCardProps) {
   return (
     <section className="shadow rounded-lg p-3 flex items-center space-x-3">
-      {Icon && <Icon  />}
+      {Icon && <Icon />}
       {iconUrl && (
-        <img
-          src={iconUrl}
-          alt={title}
-          className="w-8 h-8 object-contain"
-        />
+        <div className="relative w-8 h-8">
+          <Image
+            src={iconUrl}
+            alt={title}
+            fill
+            className="object-contain"
+            sizes="32px"
+            priority={false}
+          />
+        </div>
       )}
       <div className="flex flex-col">
         <h2 className="font-semibold text-sm">{title}</h2>

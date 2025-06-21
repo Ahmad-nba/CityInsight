@@ -6,6 +6,14 @@ export type UnsplashImage = {
   alt_description: string | null;
   url: string;
 };
+type UnsplashRawImage = {
+  id: string;
+  alt_description: string | null;
+  urls: {
+    regular: string;
+  };
+};
+
 
 export default async function fetchImages(city: string): Promise<UnsplashImage[]> {
   const res = await fetch(`${BASE_URL}?query=${city}&per_page=6&client_id=${UNSPLASH_KEY}`);
@@ -17,7 +25,7 @@ export default async function fetchImages(city: string): Promise<UnsplashImage[]
 
   const data = await res.json();
 
-  return data.results.map((img: any) => ({
+  return data.results.map((img: UnsplashRawImage) => ({
     id: img.id,
     alt_description: img.alt_description,
     url: img.urls.regular,

@@ -30,15 +30,17 @@ export async function fetchPopularCities(limit = 100): Promise<string[]> {
     },
   });
 
-  console.log("Status:", response.status);
-  console.log("Headers:", response.headers);
-
-  const data: GeoDBResponse = await response.json();
-  console.log("Body:", JSON.stringify(data, null, 2));
+  const json = await response.json();
 
   if (!response.ok) {
-    throw new Error("Failed to fetch cities: " + (data as any).message); // fallback in case message isn't typed
+    const message =
+      typeof json === "object" && "message" in json
+        ? json.message
+        : "Unknown error";
+    throw new Error(`Failed to fetch cities: ${message}`);
   }
 
+  // ✅ Now safely assert json is GeoDBResponse
+  const data = json as GeoDBResponse;
   return data.data.map((city) => city.city);
 }

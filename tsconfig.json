@@ -13,14 +13,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "baseUrl": "src",                   // 👈 Base URL now starts from `src/`
     "paths": {
-      "@/*": ["./src/*"]
-    }
+      "@features/*": ["features/*"],   // ✔️ maps to src/features/*
+      "@homeComponents/*": ["homeComponents/*"], // ✔️ maps to src/homeComponents/*
+      "@app/*": ["app/*"],             // optional but useful
+      "@styles/*": ["globals.css"]     // optional: alias for your global styles
+    },
+    "plugins": [
+      { "name": "next" }
+    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]

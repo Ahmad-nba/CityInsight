@@ -26,7 +26,7 @@ export default function Page() {
       <section className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {cities.length === 0 ? (
           <p className="text-gray-400 sm:col-span-2 md:col-span-3 lg:col-span-4 py-4 text-center">
-            You haven't added any cities yet.
+            You haven&apos;t added any cities yet.
           </p>
         ) : (
           cities.map((city) => (

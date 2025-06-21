@@ -7,7 +7,7 @@ type PageProps = {
   };
 };
 
-export default async function Page({ params }: PageProps) {
+export default async function ImagesPage({ params }: PageProps) {
   const images = await fetchImages(params.city);
 
   return (

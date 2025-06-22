@@ -7,7 +7,7 @@ export default function NavBar() {
     { route: "Home", href: "/", id: 1 },
     { route: "My cities", href: "/mycities", id: 2 },
   ];
-
+  const path = usePathname();
   return (
     <nav className="flex justify-between mx-1.5 p-1.5 sm:p-2 sm:mx-6 ">
       <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
@@ -15,7 +15,6 @@ export default function NavBar() {
       </h1>
       <ul className="flex justify-center space-x-2 sm:space-x-4">
         {links.map((link) => {
-          const path = usePathname();
           const home = link.href === "/";
           const isActive = home ? path === "/" : path.startsWith(link.href);
           return (

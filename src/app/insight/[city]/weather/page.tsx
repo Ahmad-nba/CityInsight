@@ -7,13 +7,14 @@ export default async function WeatherPage({
 }: {
   params: { city: string };
 }) {
-  const weather = await fetchWeather(params.city);
+  const { city } = await Promise.resolve(params); // ✅ fix
 
+  const weather = await fetchWeather(city);
   const iconUrl = `https://openweathermap.org/img/wn/${weather.icon}@2x.png`;
 
   return (
     <div className="w-full flex flex-col space-y-4 rounded">
-      <h2 className="text-base capitalize">{params.city}</h2>
+      <h2 className="text-base capitalize">{city}</h2>
       <h2 className="text-xl font-semibold">{weather.temperature}°C</h2>
       <div className="flex text-xs space-x-4">
         <h1>Humidity: {weather.humidity}%</h1>
@@ -23,7 +24,7 @@ export default async function WeatherPage({
       <section id="cards" className="grid gap-2 grid-cols-2">
         <WeatherCard
           title="Weather"
-          value={`${weather.description}`}
+          value={weather.description}
           Icon={FaTemperatureHigh}
         />
         <WeatherCard

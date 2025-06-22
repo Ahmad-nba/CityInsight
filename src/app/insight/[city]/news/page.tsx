@@ -3,7 +3,8 @@ import { news } from "@features/insight/lib/mocknews";
 import Link from "next/link";
 
 export default async function Page({ params }: { params: { city: string } }) {
-  const articles = await fetchNews(params.city);
+  const { city } = await Promise.resolve(params);
+  const articles = await fetchNews(city);
   return (
     <section className="space-y-4">
       {articles.map((news) => (

@@ -7,7 +7,7 @@ export default async function WeatherPage({
 }: {
   params: { city: string };
 }) {
-  const { city } = await Promise.resolve(params); // ✅ fix
+  const { city } = params
 
   const weather = await fetchWeather(city);
   const iconUrl = `https://openweathermap.org/img/wn/${weather.icon}@2x.png`;

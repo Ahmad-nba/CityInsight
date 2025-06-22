@@ -1,7 +1,7 @@
 import { fetchImages } from "@features/insight/api";
 
 export default async function Page({ params }: { params: { city: string } }) {
-   const { city } = await Promise.resolve(params);
+   const { city } = params
   const images = await fetchImages(city);
   return (
     <section className="grid gap-2 grid-cols-2">

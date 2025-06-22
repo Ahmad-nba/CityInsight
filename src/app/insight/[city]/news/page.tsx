@@ -2,7 +2,7 @@ import { fetchNews } from "@features/insight/api";
 import Link from "next/link";
 
 export default async function Page({ params }: { params: { city: string } }) {
-  const { city } = await Promise.resolve(params);
+  const { city } = params
   const articles = await fetchNews(city);
   return (
     <section className="space-y-4">

@@ -1,25 +1,44 @@
 const API_KEY = process.env.GEODB_API_KEY;
 const BASE_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities";
 
+type GeoDBCity = {
+  id: number;
+  city: string;
+  name: string;
+  country: string;
+  countryCode: string;
+  region: string;
+  regionCode: string;
+  latitude: number;
+  longitude: number;
+  population: number;
+};
+
+type GeoDBResponse = {
+  data: GeoDBCity[];
+  metadata: {
+    currentOffset: number;
+    totalCount: number;
+  };
+  message?: string;
+};
+
 export async function fetchPopularCities(limit = 100): Promise<string[]> {
   const response = await fetch(`${BASE_URL}?limit=${limit}&sort=-population`, {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "fb3fda30b8mshdb28a735d74d37dp167592jsnb185f03f637a",
+      "X-RapidAPI-Key": API_KEY || "",
       "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
     },
   });
 
-  console.log("Status:", response.status);
-  console.log("Headers:", response.headers);
-
-  // ✅ Read and log JSON only once
-  const data = await response.json();
-  console.log("Body:", JSON.stringify(data, null, 2));
+  const data: GeoDBResponse = await response.json();
 
   if (!response.ok) {
-    throw new Error("Failed to fetch cities: " + data.message);
+    throw new Error(
+      "Failed to fetch cities: " + (data.message ?? "Unknown error")
+    );
   }
 
-  return data.data.map((city: any) => city.city);
+  return data.data.map((city) => city.city);
 }

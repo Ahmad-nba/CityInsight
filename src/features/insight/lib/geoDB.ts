@@ -1,4 +1,12 @@
-const API_KEY = process.env.GEODB_API_KEY;
+type GeoCity = {
+  city: string;
+  [key: string]: unknown; // ← keep it flexible for other fields
+};
+
+type GeoDBResponse = {
+  data: GeoCity[];
+};
+
 const BASE_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities";
 
 export async function fetchPopularCities(limit = 100): Promise<string[]> {
@@ -13,13 +21,12 @@ export async function fetchPopularCities(limit = 100): Promise<string[]> {
   console.log("Status:", response.status);
   console.log("Headers:", response.headers);
 
-  // ✅ Read and log JSON only once
-  const data = await response.json();
+  const data: GeoDBResponse = await response.json();
   console.log("Body:", JSON.stringify(data, null, 2));
 
   if (!response.ok) {
-    throw new Error("Failed to fetch cities: " + data.message);
+    throw new Error("Failed to fetch cities: " + (data as any)?.message);
   }
 
-  return data.data.map((city: any) => city.city);
+  return data.data.map((city) => city.city);
 }

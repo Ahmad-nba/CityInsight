@@ -1,5 +1,4 @@
 import { fetchNews } from "@features/insight/api";
-import { news } from "@features/insight/lib/mocknews";
 import Link from "next/link";
 import { PageProps } from "../images/page";
 

@@ -1,5 +1,3 @@
-const API_KEY = process.env.WEATHER_API_KEY; //  OpenWeather
-const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
 export async function fetchWeather(city: string) {
   const API_KEY = process.env.WEATHER_API_KEY;

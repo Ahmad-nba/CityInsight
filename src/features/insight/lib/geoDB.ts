@@ -1,10 +1,11 @@
 type GeoCity = {
   city: string;
-  [key: string]: unknown; // ← keep it flexible for other fields
+  // You can add more fields here if needed (e.g., population, id, etc.)
 };
 
 type GeoDBResponse = {
   data: GeoCity[];
+  message?: string; // Add this to safely access message on error
 };
 
 const BASE_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities";
@@ -18,14 +19,11 @@ export async function fetchPopularCities(limit = 100): Promise<string[]> {
     },
   });
 
-  console.log("Status:", response.status);
-  console.log("Headers:", response.headers);
-
   const data: GeoDBResponse = await response.json();
-  console.log("Body:", JSON.stringify(data, null, 2));
 
   if (!response.ok) {
-    throw new Error("Failed to fetch cities: " + (data as any)?.message);
+    const message = data.message ?? "Unknown error occurred";
+    throw new Error(`Failed to fetch cities: ${message}`);
   }
 
   return data.data.map((city) => city.city);

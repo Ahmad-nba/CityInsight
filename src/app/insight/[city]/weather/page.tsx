@@ -1,14 +1,10 @@
 import WeatherCard from "@features/insight/components/weatherCard";
 import { fetchWeather } from "@features/insight/api/index";
 import { FaTemperatureHigh, FaWind, FaTint, FaCloudSun } from "react-icons/fa";
+import { PageProps } from "../images/page";
 
-export default async function WeatherPage({
-  params,
-}: {
-  params: { city: string };
-}) {
-  const { city } = await Promise.resolve(params); // ✅ fix
-
+export default async function WeatherPage(props: PageProps) {
+  const { city } = props.params;
   const weather = await fetchWeather(city);
   const iconUrl = `https://openweathermap.org/img/wn/${weather.icon}@2x.png`;
 

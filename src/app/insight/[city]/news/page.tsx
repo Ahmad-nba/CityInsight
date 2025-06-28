@@ -1,9 +1,10 @@
 import { fetchNews } from "@features/insight/api";
 import { news } from "@features/insight/lib/mocknews";
 import Link from "next/link";
+import { PageProps } from "../images/page";
 
-export default async function Page({ params }: { params: { city: string } }) {
-  const { city } = await Promise.resolve(params);
+export default async function Page(props:PageProps) {
+  const { city } = props.params;
   const articles = await fetchNews(city);
   return (
     <section className="space-y-4">

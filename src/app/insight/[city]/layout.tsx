@@ -13,14 +13,7 @@ import { useMyCitiesStore } from "@features/savedCities/store/store";
 import toast from "react-hot-toast";
 import ClientLayout from "./clientLayout";
 
-export default function CityLayout({
-  children,
-}: {
-  children: ReactNode;
-  weather: ReactNode;
-  news: ReactNode;
-  images: ReactNode;
-}) {
+export default function CityLayout({ children }: { children: ReactNode }) {
   // const { city } = useParams();
   // const pathname = usePathname();
   const params = useParams();

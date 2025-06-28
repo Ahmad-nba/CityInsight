@@ -4,7 +4,8 @@ import Link from "next/link";
 import { PageProps } from "../images/page";
 
 export default async function Page(props:PageProps) {
-  const { city } = props.params;
+  const params = await props.params;
+  const { city } = params;
   const articles = await fetchNews(city);
   return (
     <section className="space-y-4">

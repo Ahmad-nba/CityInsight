@@ -4,7 +4,8 @@ import { FaTemperatureHigh, FaWind, FaTint, FaCloudSun } from "react-icons/fa";
 import { PageProps } from "../images/page";
 
 export default async function WeatherPage(props: PageProps) {
-  const { city } = props.params;
+  const params = await props.params;
+  const { city } = params;
   const weather = await fetchWeather(city);
   const iconUrl = `https://openweathermap.org/img/wn/${weather.icon}@2x.png`;
 

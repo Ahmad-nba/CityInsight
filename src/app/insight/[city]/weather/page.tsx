@@ -2,6 +2,12 @@ import WeatherCard from "@features/insight/components/weatherCard";
 import { fetchWeather } from "@features/insight/api/index";
 import { FaTemperatureHigh, FaWind, FaTint, FaCloudSun } from "react-icons/fa";
 import { PageProps } from "../images/page";
+import cities from "@features/insight/data/cities.json";
+
+export async function generateStaticParams() {
+  return cities.map((city) => ({ city }));
+}
+
 
 export default async function WeatherPage(props: PageProps) {
   const params = await props.params;

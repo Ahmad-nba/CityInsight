@@ -1,8 +1,13 @@
 import { fetchNews } from "@features/insight/api";
 import Link from "next/link";
 import { PageProps } from "../images/page";
+import cities from "@features/insight/data/cities.json";
 
-export default async function Page(props:PageProps) {
+export async function generateStaticParams() {
+  return cities.map((city) => ({ city }));
+}
+
+export default async function Page(props: PageProps) {
   const params = await props.params;
   const { city } = params;
   const articles = await fetchNews(city);

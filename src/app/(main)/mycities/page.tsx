@@ -8,39 +8,41 @@ export default function Page() {
   const cities = useMyCitiesStore((state) => state.cities);
 
   return (
-    <section className="p-4 max-w-6xl mx-auto">
-      <div id="topnav" className="mb-4 md:mb-6">
+    <section className="p-4 max-w-6xl mx-auto min-h-[80vh] flex flex-col">
+      {/* Top Nav */}
+      <div id="topnav" className="mb-6">
         <Link
           href="/"
-          className="flex items-center space-x-1 md:space-x-2 hover:opacity-80 transition-opacity"
+          className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
         >
-          <IoMdArrowRoundBack className="text-lg md:text-xl" />
-          <h1 className="font-semibold md:text-lg">Back</h1>
+          <IoMdArrowRoundBack className="text-xl" />
+          <h1 className="font-semibold text-lg">Back</h1>
         </Link>
       </div>
 
-      <h2 className="text-lg font-semibold mb-2 md:text-xl md:mb-4 lg:text-2xl">
-        Your Cities
-      </h2>
+      {/* Heading */}
+      <h2 className="text-2xl font-semibold mb-6">Your Cities</h2>
 
-      <section className="grid gap-2 sm:gap-3 md:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {/* Grid */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex-grow">
         {cities.length === 0 ? (
-          <p className="text-gray-400 sm:col-span-2 md:col-span-3 lg:col-span-4 py-4 text-center">
+          <div className="col-span-full py-20 text-center text-gray-400 text-lg">
             You have not added any cities yet.
-          </p>
+          </div>
         ) : (
           cities.map((city) => (
             <Link
               key={city}
               href={`/insight/${encodeURIComponent(city)}`}
-              className="p-3 rounded shadow bg-acc2 text-black hover:bg-acc1/90 transition
-                         sm:p-4 md:text-lg flex items-center min-h-[64px]"
+              className="bg-acc2 hover:bg-acc1/90 transition-all duration-200
+                         rounded-xl shadow-md p-5 flex items-center justify-center text-center
+                         text-black font-medium capitalize text-base sm:text-lg min-h-[96px]"
             >
-              {city.charAt(0).toUpperCase() + city.slice(1)}
+              {city}
             </Link>
           ))
         )}
-      </section>
+      </div>
     </section>
   );
 }

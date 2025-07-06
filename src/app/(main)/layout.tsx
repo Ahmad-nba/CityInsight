@@ -5,8 +5,15 @@ import Footer from "../homeComponents/footer";
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  title: "CityInsight",
+  title: {
+    default: "CityInsight",
+    template: "CityInsight - %s",
+  },
   description: "Get a glimpse into the city atmosphere",
+  keywords: ["city", "weather", "news", "images", "climate", "city insights"],
+  other: {
+    author: "Ahamada Shamuran",
+  },
 };
 
 export default function RootLayout({
